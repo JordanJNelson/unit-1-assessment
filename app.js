@@ -1,35 +1,59 @@
-const incrementButton = document.getElementById('increment');
-const decrementButton = document.getElementById('decrement');
-const countDisplay = document.getElementById('count');
-const input = document.getElementById('input');
-const resultSpan = document.getElementById('result');
+const numDisplayWrapper = document.querySelector(".countDisplay");
+const numCounterDisplay = document.querySelector(".counter");
+const addButton = document.querySelector(".add");
+const subButton = document.querySelector(".subtract");
+const numField = document.querySelector(".numInput");
 
-let count = 0;
+let counter = 0;
 
-// Initial count value and input value
+addButton.addEventListener("click", function(){
+  if (isNaN(document.querySelector(".numInput").value)) {
+    numCounterDisplay.textContent = " Error: please enter number"
+    console.log(numCounterDisplay);
+    return;
 
-countDisplay.textContent = count;
-input.value = 1;
 
-incrementButton.addEventListener('click', () => {
-    count += parseInt(input.value);
-    updateCountDisplay();
+  } else {
+    let number = document.querySelector(".numInput").value;
+    makeNum = Number(number);
+    newNum = makeNum + counter;
+    counter = newNum;
+    numCounterDisplay.textContent = Number(counter);
+    console.log(counter);
+    turnRed();
+  }
 });
 
-decrementButton.addEventListener('click', () => {
-    count -= parseInt(input.value);
-    updateCountDisplay();
+subButton.addEventListener("click", function(){
+  if(isNaN(document.querySelector(".numInput").value)) {
+    numCounterDisplay.textContent = "Error: please enter number ";
+    console.log(numCounterDisplay);
+    returnl
+  } else {
+  let number = document.querySelector(".numInput").value;
+  makeNum = Number(number);
+  newNum = counter - makeNum;
+  counter = newNum;
+  numCounterDisplay.textContent = Number(counter);
+  turnRed();
+  }
 });
 
-function updateCountDisplay() {
-    countDisplay.textContent = count;
-    updateResultSpan();
-}
+let turnRed = () => {
+  if(counter < 0){
+    console.log(numCounterDisplay);
+    numCounterDisplay.style.color = "red";
+  } else if (counter => 0) {
+    numCounterDisplay.style.color = "black";
+  }
+};
 
-function updateResultSpan() {
-    resultSpan.textContent = count;
-    resultSpan2.textContent = count;
-}
-getCountButton.addEventListener('click', () => {
-  alert('Current Count: ' + count);
-});
+let checkNum = () => {
+  let number = document.querySelector(".numInput").value;
+  if(Number.isInteger(number) === false) {
+    let warningDiv = document.createElement("div");
+    warningDiv.classList.add("notaNum");
+    warningDiv.textContent = "this is not a number";
+    numDisplayWrapper.after(warningDiv);
+  }
+};
